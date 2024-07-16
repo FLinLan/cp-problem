@@ -94,6 +94,45 @@ namespace linked_list {
     }
 }
 
+namespace binary_tree {
+    struct TreeNode {
+        int val;
+        TreeNode *left;
+        TreeNode *right;
+        TreeNode() : val(0), left(nullptr), right(nullptr) {}
+        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    };
+
+    // Function to create a new node
+    TreeNode* newNode(int val) {
+        return new TreeNode(val);
+    }
+
+    // Function to insert a node into the binary search tree
+    TreeNode* insert(TreeNode* root, int val) {
+        if (root == nullptr) {
+            return newNode(val);
+        }
+        if (val < root->val) {
+            root->left = insert(root->left, val);
+        } else if (val > root->val) {
+            root->right = insert(root->right, val);
+        }
+        return root;
+    }
+
+    // Function for inorder traversal of the tree
+    void inorder(TreeNode* root) {
+        if (root == nullptr) return;
+        inorder(root->left);
+        cout << root->val << " ";
+        inorder(root->right);
+    }
+}
+
+using namespace binary_tree;
+
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 int random(int mod) {
@@ -253,16 +292,7 @@ void lower(string &s) {
 }
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    vector<vector<char>> grid(n, vector<char>(m));
-    int ROWS = grid.size(), COLS = grid[0].size();
-
-    for (int r = 0; r < ROWS; r++) {
-        for (int c = 0; c < COLS; c++) {
-            
-        }
-    }
+    
 }
 
 signed main() {
