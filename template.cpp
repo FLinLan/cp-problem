@@ -72,7 +72,7 @@ namespace linked_list {
         }
         delete a;
     }
-
+    
     void print(linkl *a) {
         while (a != NULL) {
             cout << a->x << " ";
@@ -128,6 +128,33 @@ namespace binary_tree {
         inorder(root->left);
         cout << root->val << " ";
         inorder(root->right);
+    }
+
+    TreeNode* buildTree(string& s, int& i) {
+    if (i >= s.length() || s[i] == ')') {
+        i++;
+        return nullptr;
+    }
+    
+    int start = i;
+    while (i < s.length() && s[i] != '(' && s[i] != ')') i++;
+    int val = stoi(s.substr(start, i - start));
+    
+    TreeNode* root = new TreeNode(val);
+    
+    if (i < s.length() && s[i] == '(') {
+        i++;  // skip '('
+        root->left = buildTree(s, i);
+        i++;  // skip ')'
+    }
+    
+    if (i < s.length() && s[i] == '(') {
+        i++;  // skip '('
+        root->right = buildTree(s, i);
+        i++;  // skip ')'
+    }
+    
+    return root;
     }
 }
 
@@ -292,7 +319,19 @@ void lower(string &s) {
 }
 
 void solve() {
-
+    // g++ -std=c++17 your_file.cpp -o output_name
+    int n;
+    cin >> n;  // number of nodes
+    TreeNode* root = nullptr;
+    for (int i = 0; i < n; i++) {
+        int val;
+        cin >> val;
+        if (i == 0) {
+            root = new TreeNode(val);
+        } else {
+            insert(root, val);
+        }
+    }
     
 }
 
