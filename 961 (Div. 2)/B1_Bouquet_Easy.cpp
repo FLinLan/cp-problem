@@ -319,20 +319,10 @@ void lower(string &s) {
 }
 
 void solve() {
-    // g++ -std=c++17 A_Diagonals.cpp -o A_Diagonals && ./A_Diagonals < input.txt > output.txt
-    int n;
-    cin >> n;  // number of nodes
-    TreeNode* root = nullptr;
-    for (int i = 0; i < n; i++) {
-        int val;
-        cin >> val;
-        if (i == 0) {
-            root = new TreeNode(val);
-        } else {
-            insert(root, val);
-        }
-    }
-    
+    // g++ -std=c++17 your_file.cpp -o output_name
+    int n, m;
+    cin >> n >> m; // the number of flowers in the store and the number of coins the girl possesses
+
 }
 
 signed main() {

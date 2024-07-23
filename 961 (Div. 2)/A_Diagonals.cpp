@@ -7,6 +7,8 @@
 #include <cmath>
 #include <string>
 #include <utility>
+#include <unordered_set>
+#include <unordered_map>
 
 using namespace std;
 
@@ -319,20 +321,20 @@ void lower(string &s) {
 }
 
 void solve() {
-    // g++ -std=c++17 A_Diagonals.cpp -o A_Diagonals && ./A_Diagonals < input.txt > output.txt
-    int n;
-    cin >> n;  // number of nodes
-    TreeNode* root = nullptr;
-    for (int i = 0; i < n; i++) {
-        int val;
-        cin >> val;
-        if (i == 0) {
-            root = new TreeNode(val);
-        } else {
-            insert(root, val);
+    int n, k;
+    cin >> n >> k; // size for the n x n board and number of chips
+    
+    unordered_set<int> visit;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (k == 0) break;
+            if (visit.find(i+j) == visit.end()) {
+                visit.insert(i+j);
+                k--;
+            }
         }
     }
-    
+    cout << visit.size() << endl;
 }
 
 signed main() {
