@@ -318,22 +318,24 @@ void lower(string &s) {
     }
 }
 
-long long power(ll base, ll expo) {
-    ll res = 0;
-
-    for (int i = 0; i < expo; i++) {
+void solve() {
+    // g++ -std=c++17 Missing_Number.cpp -o Missing_Number && ./Missing_Number < input.txt > output.txt
+    int n;
+    cin >> n;  // number of nodes
+    
+    int mask = 0;
+    for (int i = 1; i <= n; i++) {
+        mask ^= i;
+    }
+    int missing = 0;
+    for (int i = 0; i < n-1; i++) {
+        int val;
+        cin >> val;
+        missing ^= val;
     }
 
-    return res;
-}
-
-void solve() {
-    // g++ -std=c++17 Bit_Strings.cpp -o Bit_Strings && ./Bit_Strings < input.txt > output.txt
-    int n;
-    cin >> n;  // length n
-    int mod = 1e9 + 7;
-    
-    cout << (int)pow(2, n) % mod << nl;
+    int res = missing ^ mask;
+    cout << res << nl;
 }
 
 signed main() {
