@@ -321,29 +321,31 @@ void lower(string &s) {
 }
 
 void solve() {
-    // g++ -std=c++17 A_Diagonals.cpp -o A_Diagonals && ./A_Diagonals < input.txt > output.txt
-    int n;
-    cin >> n;  // number of nodes
-    TreeNode* root = nullptr;
-    for (int i = 0; i < n; i++) {
-        int val;
-        cin >> val;
-        if (i == 0) {
-            root = new TreeNode(val);
-        } else {
-            insert(root, val);
+    // g++ -std=c++17 Repetitions.cpp -o Repetitions && ./Repetitions < input.txt > output.txt
+    string s;
+    cin >> s;  // input string
+
+    int res = 0, count = 0;
+    char curr;
+    for (auto ch : s) {
+        if (curr != ch) {
+            count = 0;
+            curr = ch;
         }
+        count++;
+        res = max(res, count);
     }
-    
+    cout << res << nl;
 }
+
 
 signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int T = 1;
-    cin >> T;
-    while (T--) {
-        solve();
-    }
+    // int T = 1;
+    // cin >> T;
+    // while (T--) {
+    //     solve();
+    // }
     solve();
 }
