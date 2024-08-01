@@ -320,54 +320,64 @@ void lower(string &s) {
     }
 }
 
-vector<int> combine(vector<int>& v1, vector<int>& v2) {
-    vector<int> res;
-    for (auto n : v1) res.push_back(n);
-    int N = res.size();
-    swap(res[N-1], res[N-2]);
-    for (auto n : v2) res.push_back(n);
-    return res;
+bool bt(vector<vector<char>>& grid, string path, int r, int c, int ROWS, int COLS, string& ans) {
+    if (r < 0 || c < 0 || r >= ROWS || c >= COLS || grid[r][c] == '#' || grid[r][c] == ' ') {
+        ans = path;
+        return false;
+    }
+
+    if (grid[r][c] == 'B') return true;
+
+    char temp = grid[r][c];
+    grid[r][c] = '#'; // choose
+
+    // explore
+    bool search = (bt(grid, path + 'L', r, c-1, ROWS, COLS, ans) ||
+                   bt(grid, path + 'R', r, c+1, ROWS, COLS, ans) ||
+                   bt(grid, path + 'D', r+1, c, ROWS, COLS, ans) ||
+                   bt(grid, path + 'U', r-1, c, ROWS, COLS, ans));
+    
+    grid[r][c] = temp; // unchoose 
+    return search;
 }
+
 
 void solve() {
-    // g++ -std=c++17 Permutations.cpp -o Permutations && ./Permutations < input.txt > output.txt
-    int n;
-    cin >> n;
-    if (n == 1) {
-        cout << 1 << nl;
-        return;
-    } else if (n == 2 || n == 3) {
-        cout << "NO SOLUTION" << nl;
-        return;
-    }
+    // g++ -std=c++17 Labyrinth.cpp -o Labyrinth && ./Labyrinth < input.txt > output.txt
+    int n, m;
+    cin >> n >> m; 
 
-    vector<int> odd, even;
-
-    for (int i = 1; i <= n; i++) {
-        if (i & 1) {
-            odd.push_back(i);
-        } else {
-            even.push_back(i);
+    int startRow, startCol;
+    vector<vector<char>>grid;
+    for (int r = 0; r < n; r++) {
+        vector<char> line;
+        for (int c = 0; c < m; c++) {
+            char ch;
+            cin >> ch;
+            if (ch == 'A') {
+                startRow = r;
+                startCol = c;
+            } else if (ch == '\0') ch = '.';
+            line.push_back(ch);
         }
-    }
-    vector<int> nums;
-    if (odd.back() == n) {
-        reverse(odd.begin(), odd.end());
-        nums = combine(even, odd);
-    } else {
-        reverse(even.begin(), even.end());
-        nums = combine(odd, even);
+        grid.push_back(line);
     }
     
-    for (auto n : nums) {
-        cout << n << " ";
+    string path;
+    if (bt(grid, "", startRow, startCol, n, m, path)) {
+        cout << "YES" << nl;
+        cout << path.length() << nl;
+        cout << path << nl;
+    } else {
+        cout << "NO" << nl;
     }
 }
+
 
 signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    // int T = 1;
+    int T = 1;
     // cin >> T;
     // while (T--) {
     //     solve();
