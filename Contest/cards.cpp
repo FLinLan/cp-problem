@@ -320,70 +320,48 @@ void lower(string &s) {
     }
 }
 
-bool bt(vector<vector<char>>& grid, string path, int r, int c, int ROWS, int COLS, string& ans) {
-    if (r < 0 || c < 0 || r >= ROWS || c >= COLS || grid[r][c] == '#') {
-        ans = path;
-        return false;
-    }
-
-    if (grid[r][c] == 'B') return true;
-
-    char temp = grid[r][c];
-    grid[r][c] = '#'; // choose
-
-    // explore
-    bool search = (bt(grid, path + 'L', r, c-1, ROWS, COLS, ans) ||
-                   bt(grid, path + 'R', r, c+1, ROWS, COLS, ans) ||
-                   bt(grid, path + 'D', r+1, c, ROWS, COLS, ans) ||
-                   bt(grid, path + 'U', r-1, c, ROWS, COLS, ans));
-    
-    grid[r][c] = temp; // unchoose 
-    return search;
-}
-
-
 void solve() {
-    // g++ -std=c++17 Labyrinth.cpp -o Labyrinth && ./Labyrinth < input.txt > output.txt
-    int n, m;
-    cin >> n >> m; 
+    int a1, a2, b1, b2;
+    cin >> a1 >> a2 >> b1 >> b2;
 
-    int startRow, startCol;
-    vector<vector<char>>grid;
-    for (int r = 0; r < n; r++) {
-        vector<char> line;
-        for (int c = 0; c < m; c++) {
-            char ch;
-            cin >> ch;
-            if (ch == 'A') {
-                startRow = r;
-                startCol = c;
-            } else if (ch == '\0') {
-                line.push_back('.');
-            } else {
-                line.push_back(ch);
-            }
-        }
-        grid.push_back(line);
-    }
-    
-    string path;
-    if (bt(grid, "", startRow, startCol, n, m, path)) {
-        cout << "YES" << nl;
-        cout << path.length() << nl;
-        cout << path << nl;
+    int suneet_wins = 0;
+
+    // Helper function to count Suneet's wins in a single round
+    auto count_wins = [](int s, int t) {
+        if (s > t) return 1;
+        return 0;  // Tie or lose
+    };
+
+    // Count wins for all possible combinations
+    suneet_wins += count_wins(a1, b1);
+    suneet_wins += count_wins(a1, b2);
+    suneet_wins += count_wins(a2, b1);
+    suneet_wins += count_wins(a2, b2);
+
+    // Calculate total number of games Suneet wins
+    int total_wins = 0;
+    if (suneet_wins == 4) {
+        total_wins = 4;  // Suneet wins both rounds in all scenarios
+    } else if (suneet_wins == 3) {
+        total_wins = 2;  // Suneet wins at least one round in all scenarios
+    } else if (suneet_wins == 2) {
+        total_wins = 0;  // Suneet wins 2 rounds but loses 2 rounds, no overall game win
+    } else if (suneet_wins == 1) {
+        total_wins = 0;  // Suneet can't win any game
     } else {
-        cout << "NO" << nl;
+        total_wins = 0;  // Suneet loses all rounds
     }
-}
 
+    cout << total_wins << endl;
+}
 
 signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int T = 1;
-    // cin >> T;
-    // while (T--) {
-    //     solve();
-    // }
-    solve();
+    cin >> T;
+    while (T--) {
+        solve();
+    }
+    // solve();
 }

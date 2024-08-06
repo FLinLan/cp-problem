@@ -320,70 +320,49 @@ void lower(string &s) {
     }
 }
 
-bool bt(vector<vector<char>>& grid, string path, int r, int c, int ROWS, int COLS, string& ans) {
-    if (r < 0 || c < 0 || r >= ROWS || c >= COLS || grid[r][c] == '#') {
-        ans = path;
-        return false;
-    }
-
-    if (grid[r][c] == 'B') return true;
-
-    char temp = grid[r][c];
-    grid[r][c] = '#'; // choose
-
-    // explore
-    bool search = (bt(grid, path + 'L', r, c-1, ROWS, COLS, ans) ||
-                   bt(grid, path + 'R', r, c+1, ROWS, COLS, ans) ||
-                   bt(grid, path + 'D', r+1, c, ROWS, COLS, ans) ||
-                   bt(grid, path + 'U', r-1, c, ROWS, COLS, ans));
-    
-    grid[r][c] = temp; // unchoose 
-    return search;
-}
-
-
 void solve() {
-    // g++ -std=c++17 Labyrinth.cpp -o Labyrinth && ./Labyrinth < input.txt > output.txt
-    int n, m;
-    cin >> n >> m; 
+    // g++ -std=c++17 triple.cpp -o triple && ./triple < input.txt > output.txt
+    int l, r;
+    cin >> l >> r; 
 
-    int startRow, startCol;
-    vector<vector<char>>grid;
-    for (int r = 0; r < n; r++) {
-        vector<char> line;
-        for (int c = 0; c < m; c++) {
-            char ch;
-            cin >> ch;
-            if (ch == 'A') {
-                startRow = r;
-                startCol = c;
-            } else if (ch == '\0') {
-                line.push_back('.');
-            } else {
-                line.push_back(ch);
-            }
-        }
-        grid.push_back(line);
-    }
+    int divisor = 0;
     
-    string path;
-    if (bt(grid, "", startRow, startCol, n, m, path)) {
-        cout << "YES" << nl;
-        cout << path.length() << nl;
-        cout << path << nl;
-    } else {
-        cout << "NO" << nl;
+    vector<int> nums;
+    for(int i = l; i <= r; i++) {
+        if (i - 2 % 3 == 0) {
+            divisor = i;
+        }
+        nums.push_back(i);
     }
-}
 
+    int factor = 0;
+    while (divisor != 0) {
+        divisor /= 3;
+        factor++;
+    }
+
+    if (!nums.empty() && divisor != nums[0]) nums[0] = nums[0] * (int)pow(3, factor);
+
+    int ans = factor;
+    for (int n : nums) {
+        int steps = 0;
+        while (n != 0) {
+            n /= 3;
+            steps++;
+        }
+        ans += steps;
+    }
+
+    cout << ans << nl;
+}
 
 signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int T = 1;
-    // cin >> T;
-    // while (T--) {
-    //     solve();
-    // }
+    cin >> T;
+    while (T--) {
+        solve();
+    }
     solve();
 }

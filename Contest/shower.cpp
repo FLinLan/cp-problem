@@ -320,70 +320,46 @@ void lower(string &s) {
     }
 }
 
-bool bt(vector<vector<char>>& grid, string path, int r, int c, int ROWS, int COLS, string& ans) {
-    if (r < 0 || c < 0 || r >= ROWS || c >= COLS || grid[r][c] == '#') {
-        ans = path;
-        return false;
-    }
-
-    if (grid[r][c] == 'B') return true;
-
-    char temp = grid[r][c];
-    grid[r][c] = '#'; // choose
-
-    // explore
-    bool search = (bt(grid, path + 'L', r, c-1, ROWS, COLS, ans) ||
-                   bt(grid, path + 'R', r, c+1, ROWS, COLS, ans) ||
-                   bt(grid, path + 'D', r+1, c, ROWS, COLS, ans) ||
-                   bt(grid, path + 'U', r-1, c, ROWS, COLS, ans));
-    
-    grid[r][c] = temp; // unchoose 
-    return search;
-}
-
-
 void solve() {
-    // g++ -std=c++17 Labyrinth.cpp -o Labyrinth && ./Labyrinth < input.txt > output.txt
-    int n, m;
-    cin >> n >> m; 
+    int n, s, m;
+    cin >> n >> s >> m;
 
-    int startRow, startCol;
-    vector<vector<char>>grid;
-    for (int r = 0; r < n; r++) {
-        vector<char> line;
-        for (int c = 0; c < m; c++) {
-            char ch;
-            cin >> ch;
-            if (ch == 'A') {
-                startRow = r;
-                startCol = c;
-            } else if (ch == '\0') {
-                line.push_back('.');
-            } else {
-                line.push_back(ch);
-            }
-        }
-        grid.push_back(line);
+    vector<pair<int, int>> intervals(n);
+    for (int i = 0; i < n; i++) {
+        cin >> intervals[i].first >> intervals[i].second;
     }
-    
-    string path;
-    if (bt(grid, "", startRow, startCol, n, m, path)) {
+
+    sort(intervals.begin(), intervals.end());
+
+    // Check if shower can be taken before the first task
+    if (intervals[0].first >= s) {
         cout << "YES" << nl;
-        cout << path.length() << nl;
-        cout << path << nl;
-    } else {
-        cout << "NO" << nl;
+        return;
     }
-}
 
+    // Check between tasks
+    for (int i = 1; i < n; i++) {
+        if (intervals[i].first - intervals[i-1].second >= s) {
+            cout << "YES" << nl;
+            return;
+        }
+    }
+
+    // Check after the last task
+    if (m - intervals[n-1].second >= s) {
+        cout << "YES" << nl;
+        return;
+    }
+
+    cout << "NO" << nl;
+}
 
 signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int T = 1;
-    // cin >> T;
-    // while (T--) {
-    //     solve();
-    // }
-    solve();
+    cin >> T;
+    while (T--) {
+        solve();
+    }
 }
