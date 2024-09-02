@@ -1,4 +1,12 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <set>
+#include <algorithm>
+#include <random>
+#include <chrono>
+#include <cmath>
+#include <string>
+#include <utility>
 
 using namespace std;
 
@@ -25,8 +33,8 @@ const ld EPS = 1e-9;
 
 
 void solve() {
-    // g++ -std=c++17 A_Diagonals.cpp -o A_Diagonals && ./A_Diagonals < input.txt > output.txt
-
+    // g++ -std=c++17 template.cpp -o template && ./template < input.txt > output.txt
+    
 }
 
 int main() {
