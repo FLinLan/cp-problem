@@ -1,4 +1,14 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <set>
+#include <algorithm>
+#include <random>
+#include <chrono>
+#include <cmath>
+#include <string>
+#include <utility>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -25,7 +35,28 @@ const ld EPS = 1e-9;
 
 
 void solve() {
-    // g++ -std=c++17 A_Diagonals.cpp -o A_Diagonals && ./A_Diagonals < input.txt > output.txt
+    /*
+    Given a string, your task is to reorder its letters in such a way that it becomes a palindrome (i.e., it reads the same forwards and backwards).
+    
+    Input
+    The only input line has a string of length n consisting of characters A–Z.
+    
+    Output
+    Print a palindrome consisting of the characters of the original string. You may print any valid solution. If there are no solutions, print "NO SOLUTION".
+    
+    Constraints
+    1 <= n <= 10^6
+
+    Example
+    Input:
+    AAAACACBA
+
+    Output:
+    AACABACAA
+    */
+    // g++ -std=c++17 Palindrome_Reorder.cpp -o Palindrome_Reorder && ./Palindrome_Reorder < input.txt > output.txt
+    
+    
 
 }
 

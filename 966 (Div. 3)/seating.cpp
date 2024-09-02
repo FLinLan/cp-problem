@@ -332,17 +332,13 @@ void solve() {
     // g++ -std=c++17 task.cpp -o task && ./task
     int n;
     cin >> n; 
-    ''
+
     vector<int> nums;
     for (int i = 0; i < n; i++) {
         int val;
         cin >> val;
         nums.push_back(val);
     }
-
-
-
-
 }
 
 signed main() {
