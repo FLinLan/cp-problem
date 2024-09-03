@@ -1,8 +1,8 @@
 import java.io.*;
 import java.util.*;
 
-// javac template.java && java template < input.txt > output.txt
-public class template {
+// javac GrayCode.java && java GrayCode < input.txt > output.txt
+public class GrayCode {
     static class FastScanner {
         BufferedReader br;
         StringTokenizer st = new StringTokenizer("");
@@ -56,11 +56,35 @@ public class template {
         
         out.close();
     }
-    
-    static void solve(FastScanner fs, PrintWriter out) {
-        // Solution for each test case goes here
-        // Example:
+
+    public static String gray(String binary) {
+        StringBuilder code = new StringBuilder();
+        code.append(binary.charAt(0));
+
+        for (int i = 1; i < binary.length(); i++) {
+            if (binary.charAt(i-1) != binary.charAt(i)) {
+                code.append("1");
+            } else {
+                code.append("0");
+            }
+        }
+        return code.toString();
+    }
+
+    public static String padding(String binary, int n) {
+        while (binary.length() < n) {
+            binary = "0" + binary;
+        }
+        return binary;
+    }
+
+    public static void solve(FastScanner fs, PrintWriter out) {
         int n = fs.nextInt();
-        out.println(n);
+        int bitSequence = 1 << n;
+
+        for (int i = 0; i < bitSequence; i++) {
+            String binary = padding(Integer.toBinaryString(i), n);
+            System.out.println(gray(binary));
+        }
     }
 }
