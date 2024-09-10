@@ -21,34 +21,17 @@ public class TrailingZeroes {
         }
     }
     
-    public static long factorial(int n) {
-        long factor = 1; // Change 'int' to 'long' to prevent overflow
-        int MOD = (int)1e9 + 7;
-        for (int i = 1; i <= n; i++) {
-            factor = (factor * i);
-        }
-        return factor;
+    public static int count(int n) {
+        if (n == 0) return 0;
+        return n/5 + count(n/5);
     }
 
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
 
-        
-
         int n = Integer.parseInt(fs.next());
-                
-        String factor = Long.toString(factorial(n));
-
-        int N = factor.length();
-        int ptr = N-1;
-
-        int count = 0;
-        while (ptr >= 0 && factor.substring(ptr,ptr+1).equals("0")) {
-            count++;
-            ptr--;
-        }
-        out.println(count);
+        out.println(count(n));
         out.close();
     }
 }
