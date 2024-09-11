@@ -20,42 +20,33 @@ public class TowerOfHanoi {
             return st.nextToken();
         }
     }
-
+    
+    public static void hanoi(int n, int src, int dst, List<List<Integer>> moves) {
+        if (n == 1) {
+            moves.add(Arrays.asList(src, dst));
+            return;
+        }
+        int aux = 6 - src - dst;
+        hanoi(n-1, src, aux, moves);
+        moves.add(Arrays.asList(src, dst));
+        hanoi(n-1, aux, dst, moves);
+        return;
+    }
+ 
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
 
         int n = Integer.parseInt(fs.next());
+        
+        List<List<Integer>> moves = new ArrayList<>();
+        hanoi(n, 1, 3, moves);
 
-        // Base Case 1
-        if (n == 1) {
-            out.println("1");
-            out.println("1 3");
-            out.close();
-            return;
-        }
-
-        // Base Case 2
-        if (n == 2) {
-            out.println("3");
-            out.println("1 2");
-            out.println("1 3");
-            out.println("2 3");
-            out.close();
-            return;
-        }
-
-        int moves = 3*(n-2);
-
-        out.println(moves);
-        out.println("1 2");
-        out.println("1 3");
-        out.println("2 3");
-
-        for (int i = 0; i < n-2; i++) {
-            out.println("3 2");
-            out.println("1 3");
-            out.println("2 3");
+        out.println(moves.size());
+        for (List<Integer> move : moves) {
+            int src = move.get(0);
+            int dst = move.get(1);
+            out.println(src + " " + dst);
         }
         out.close();
     }
