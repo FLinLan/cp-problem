@@ -33,8 +33,24 @@ const ld EPS = 1e-9;
 
 
 void solve() {
-    // g++ -std=c++17 template.cpp -o template && ./template < input.txt > output.txt
+    // g++ -std=c++17 YoungPhysicist.cpp -o YoungPhysicist && ./YoungPhysicist < input.txt > output.txt
+    int n;
+    cin >> n;
     
+    int finalX = 0, finalY = 0, finalZ = 0;
+    for (int i = 0; i < n; i++) {
+        int x, y, z;
+        cin >> x >> y >> z;
+        finalX += x;
+        finalY += y;
+        finalZ += z;
+    }
+
+    if (finalX == 0 && finalY == 0 && finalZ == 0) {
+        cout << "YES" << '\n';
+    } else {
+        cout << "NO" << '\n';
+    }
 }
 
 int main() {
