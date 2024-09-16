@@ -6,8 +6,6 @@
 #include <chrono>
 #include <cmath>
 #include <string>
-#include <map>
-#include <set>
 #include <utility>
 
 using namespace std;
@@ -32,12 +30,19 @@ const int MAX_N = 1e5 + 5;
 const ll MOD = 1e9 + 7;
 const ll INF = 1e9;
 const ld EPS = 1e-9;
-const char nl = '\n';
 
 
 void solve() {
-    // g++ -std=c++17 template.cpp -o template && ./template < input.txt > output.txt
+    // g++ -std=c++17 TwoKnights.cpp -o TwoKnights && ./TwoKnights < input.txt > output.txt
+    long n;
+    cin >> n;
     
+    for (long k = 1; k <= n; k++) {
+        long placements = ((k*k)*(k*k-1))/2;
+        long attackWays = 4*(k-1)*(k-2);
+
+        cout << placements - attackWays << "\n";
+    }
 }
 
 int main() {

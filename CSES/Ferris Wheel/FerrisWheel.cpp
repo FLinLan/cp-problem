@@ -6,8 +6,6 @@
 #include <chrono>
 #include <cmath>
 #include <string>
-#include <map>
-#include <set>
 #include <utility>
 
 using namespace std;
@@ -36,8 +34,34 @@ const char nl = '\n';
 
 
 void solve() {
-    // g++ -std=c++17 template.cpp -o template && ./template < input.txt > output.txt
-    
+    // g++ -std=c++17 FerrisWheel.cpp -o FerrisWheel && ./FerrisWheel < input.txt > output.txt
+    ll n = 0, x = 0;
+    cin >> n >> x;
+    vector<ll> nums;
+    for (int i = 0; i < n; i++) {
+        int val; cin >> val;
+        nums.push_back(val);
+    }
+    sort(all(nums));
+
+    int N = sza(nums);
+    int i = 0, j = N-1;
+    int gondolas = 0;
+
+    while (i <= j) {
+        if (nums[i] + nums[j] <= x) {
+            gondolas++;
+            i++;
+            j--;
+        } else if (nums[j] > nums[i] && nums[j] <= x) {
+            gondolas++;
+            j--;
+        } else {
+            gondolas++;
+            i++;
+        }
+    }
+    cout << gondolas << nl;
 }
 
 int main() {

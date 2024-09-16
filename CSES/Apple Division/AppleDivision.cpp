@@ -6,8 +6,6 @@
 #include <chrono>
 #include <cmath>
 #include <string>
-#include <map>
-#include <set>
 #include <utility>
 
 using namespace std;
@@ -34,10 +32,27 @@ const ll INF = 1e9;
 const ld EPS = 1e-9;
 const char nl = '\n';
 
+void backtrack(int i, ll sum1, ll sum2, vector<ll>& nums, ll& mini) {
+    if (i >= nums.size()) {
+        mini = min(mini, abs(sum1 - sum2));
+        return;
+    }
+    backtrack(i+1, sum1 + nums[i], sum2, nums, mini);
+    backtrack(i+1, sum1, sum2 + nums[i], nums, mini);
+    return;
+}
 
 void solve() {
-    // g++ -std=c++17 template.cpp -o template && ./template < input.txt > output.txt
-    
+    // g++ -std=c++17 AppleDivision.cpp -o AppleDivision && ./AppleDivision < input.txt > output.txt
+    int n; cin >> n;
+    vector<ll> nums;
+    for (int i = 0; i < n; i++) {
+        ll val; cin >> val;
+        nums.push_back(val);
+    }
+    ll mini = INF;
+    backtrack(0, 0, 0, nums, mini);
+    cout << mini << nl;
 }
 
 int main() {

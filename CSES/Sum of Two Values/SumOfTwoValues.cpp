@@ -33,11 +33,38 @@ const ll MOD = 1e9 + 7;
 const ll INF = 1e9;
 const ld EPS = 1e-9;
 const char nl = '\n';
+const char sp = ' ';
 
 
 void solve() {
-    // g++ -std=c++17 template.cpp -o template && ./template < input.txt > output.txt
+    // g++ -std=c++17 SumOfTwoValues.cpp -o SumOfTwoValues && ./SumOfTwoValues < input.txt > output.txt
+    int n, x;
+    cin >> n >> x;
+    vector<ll> nums;
+    for (int i = 0; i < n; i++) {
+        ll val; cin >> val;
+        nums.push_back(val);
+    }
     
+    map<ll, int> mp;
+
+    int index[2] = {-1, -1};
+    for (int i = 0; i < n; i++) {
+        int diff = x - nums[i];
+        if (mp.find(nums[i]) != mp.end()) {
+            index[0] = mp[nums[i]];
+            index[1] = i;
+            break;
+        } else {
+            mp[diff] = i;
+        }
+    }
+    
+    if (index[0] == -1 && index[1] == -1) {
+        cout << "IMPOSSIBLE" << nl;
+    } else {
+        cout << index[0]+1 << sp << index[1]+1 << nl;
+    }
 }
 
 int main() {
