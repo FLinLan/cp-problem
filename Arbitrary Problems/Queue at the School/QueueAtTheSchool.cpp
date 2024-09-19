@@ -6,6 +6,8 @@
 #include <chrono>
 #include <cmath>
 #include <string>
+#include <map>
+#include <set>
 #include <utility>
 
 using namespace std;
@@ -30,22 +32,30 @@ const int MAX_N = 1e5 + 5;
 const ll MOD = 1e9 + 7;
 const ll INF = 1e9;
 const ld EPS = 1e-9;
+const char nl = '\n';
 
 
 void solve() {
-    // g++ -std=c++17 NumberSpiral.cpp -o NumberSpiral && ./NumberSpiral < input.txt > output.txt
-    int n, m;
-    cin >> n >> m;
+    // g++ -std=c++17 QueueAtTheSchool.cpp -o QueueAtTheSchool && ./QueueAtTheSchool < input.txt > output.txt
+    int n, t;
+    string s;
+    cin >> n >> t;
+    cin >> s;
 
-
-    cout << ans << nl;
+    for (int i = 0; i < t; i++) {
+        // if (s.back() == 'G') {
+            s.insert(s.begin(), s.back());
+            s.pop_back();
+        // }
+    }
+    cout << s << nl;
 }
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
     int tc = 1;
-    cin >> tc;
+    // cin >> tc;
     for (int t = 1; t <= tc; t++) {
         // cout << "Case #" << t << ": ";
         solve();

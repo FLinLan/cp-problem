@@ -6,6 +6,10 @@
 #include <chrono>
 #include <cmath>
 #include <string>
+#include <map>
+#include <set>
+#include <unordered_set>
+#include <unordered_map>
 #include <utility>
 
 using namespace std;
@@ -30,22 +34,36 @@ const int MAX_N = 1e5 + 5;
 const ll MOD = 1e9 + 7;
 const ll INF = 1e9;
 const ld EPS = 1e-9;
+const char nl = '\n';
 
+
+bool distinct(int year) {
+    string yearStr = to_string(year);
+    unordered_set<char> digits;
+    for (char ch : yearStr) {
+        digits.insert(ch);
+    }
+    return digits.size() == yearStr.size();
+}
 
 void solve() {
-    // g++ -std=c++17 NumberSpiral.cpp -o NumberSpiral && ./NumberSpiral < input.txt > output.txt
-    int n, m;
-    cin >> n >> m;
-
-
-    cout << ans << nl;
+    // g++ -std=c++17 BeautifulYear.cpp -o BeautifulYear && ./BeautifulYear < input.txt > output.txt
+    int y;
+    cin >> y;
+    
+    for (int year = y + 1; year <= 9999; year++) {
+        if (distinct(year)) {
+            cout << year << nl;
+            return;
+        }
+    }
 }
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
     int tc = 1;
-    cin >> tc;
+    // cin >> tc;
     for (int t = 1; t <= tc; t++) {
         // cout << "Case #" << t << ": ";
         solve();
