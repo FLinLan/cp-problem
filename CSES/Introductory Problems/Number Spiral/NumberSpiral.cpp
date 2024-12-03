@@ -36,6 +36,12 @@ void solve() {
     // g++ -std=c++17 NumberSpiral.cpp -o NumberSpiral && ./NumberSpiral < input.txt > output.txt
     int n, m;
     cin >> n >> m;
+   
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+
+        }
+    }
 
 
     cout << ans << nl;

@@ -9,6 +9,8 @@
 #include <map>
 #include <set>
 #include <utility>
+#include <unordered_set>
+#include <unordered_map>
 
 using namespace std;
 
@@ -34,32 +36,46 @@ const ll INF = 1e9;
 const ld EPS = 1e-9;
 const char nl = '\n';
 
-void backtrack(int r, int c, int ROW, int COL, vector<vector<char>>& grid, vector<vector<int>>& vis) {
-    if (r >= ROW || c >= COL || r < 0 || c < 0 || vis[r][c] || grid[r][c] == '.') return;
-
-
-}
 
 void solve() {
-    // g++ -std=c++17 ChessBoardAndQueens.cpp -o ChessBoardAndQueens && ./ChessBoardAndQueens < input.txt > output.txt
-    
-    vector<vector<char>> grid(8, vector<char>(8, '\0'));
-    for (int r = 0; r < 8; r++) {
-        for (int c = 0; c < 8; c++) {
-            char ch; cin >> ch;
-            
-        }
+    // g++ -std=c++17 u.cpp -o u && ./u < input.txt > output.txt
+    int n;
+    cin >> n;
+    vector<int> nums;
+    for (int i = 0; i < n; i++) {
+        int val;
+        cin >> val;
+        nums.push_back(val);
     }
-    
-    int ans = 0;
-    cout << ans << nl;
+
+    vector<int> orig;
+    for (int i = 0; i < n; i++) {
+        orig.push_back(i+1);
+    }
+
+    int moves = 0;
+
+    vector<int> rule(n, 0);
+    for (int i = 0; i < n; i++) {
+        int index = orig[i];
+        
+        rule.push_back()
+    }
+
+    while (1) {
+        // if nums == orig break;
+        
+        moves++;
+    }
+    cout << moves << endl;
 }
+
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
     int tc = 1;
-    // cin >> tc;
+    cin >> tc;
     for (int t = 1; t <= tc; t++) {
         // cout << "Case #" << t << ": ";
         solve();
